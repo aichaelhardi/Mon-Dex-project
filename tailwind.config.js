@@ -7,7 +7,7 @@ module.exports = {
       // TODO (Partie 1) : remplacez ces valeurs par les couleurs et les polices de votre univers.
       colors: {
         brand: {
-          DEFAULT: "#2cf9aa",
+          DEFAULT: "#f2c925fb",
           dark: "#374151",
           light: "#E5E7EB",
         },

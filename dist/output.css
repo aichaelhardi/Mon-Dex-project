@@ -559,8 +559,7 @@ video {
 .btn-primary {
   height: 3rem;
   border-radius: 0.75rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(44 249 170 / var(--tw-bg-opacity, 1));
+  background-color: #f2c925fb;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   font-weight: 700;
@@ -681,8 +680,8 @@ video {
   height: 12rem;
 }
 
-.h-6 {
-  height: 1.5rem;
+.h-5 {
+  height: 1.25rem;
 }
 
 .min-h-screen {
@@ -701,8 +700,8 @@ video {
   width: 5rem;
 }
 
-.w-6 {
-  width: 1.5rem;
+.w-5 {
+  width: 1.25rem;
 }
 
 .w-\[30\%\] {
@@ -755,6 +754,10 @@ video {
 
 .grid-cols-\[80px_1fr_40px\] {
   grid-template-columns: 80px 1fr 40px;
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -856,8 +859,7 @@ video {
 }
 
 .bg-brand {
-  --tw-bg-opacity: 1;
-  background-color: rgb(44 249 170 / var(--tw-bg-opacity, 1));
+  background-color: #f2c925fb;
 }
 
 .bg-brand-light {
@@ -884,36 +886,33 @@ video {
   background-color: rgb(255 255 255 / 0.1);
 }
 
-.bg-\[url\(\'\.\/images\/pokemon\.jpg\'\)\] {
-  background-image: url('./images/pokemon.jpg');
+.bg-\[\#F97316\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[url\(\'\.\/images\/\'\)\] {
-  background-image: url('./images/');
+.bg-\[\#8B5CF6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(139 92 246 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[url\(\'\.\/images\/ph\'\)\] {
-  background-image: url('./images/ph');
+.bg-\[\] {
+  background-color: ;
 }
 
-.bg-\[url\(\'\.\/images\/pho\'\)\] {
-  background-image: url('./images/pho');
+.bg-\[\#3B82F6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[url\(\'\.\/images\/phot\'\)\] {
-  background-image: url('./images/phot');
+.bg-\[\#A855F7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(168 85 247 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[url\(\'\.\/images\/photo\'\)\] {
-  background-image: url('./images/photo');
-}
-
-.bg-\[url\(\'\.\/images\/photo\.pn\'\)\] {
-  background-image: url('./images/photo.pn');
-}
-
-.bg-\[url\(\'\.\/images\/photo\.png\'\)\] {
-  background-image: url('./images/photo.png');
+.bg-\[\#EAB308\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[url\(\'\.\.\/images\/photo\.png\'\)\] {
@@ -1056,11 +1055,6 @@ video {
 
 .leading-none {
   line-height: 1;
-}
-
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-700 {
