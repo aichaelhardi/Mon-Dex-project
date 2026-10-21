@@ -7,7 +7,7 @@ module.exports = {
       // TODO (Partie 1) : remplacez ces valeurs par les couleurs et les polices de votre univers.
       colors: {
         brand: {
-          DEFAULT: "#4B5563",
+          DEFAULT: "#2cf9aa",
           dark: "#374151",
           light: "#E5E7EB",
         },
@@ -22,7 +22,7 @@ module.exports = {
         mono: ["Courier New", "monospace"],
       },
       borderRadius: {
-        card: "20px",
+        card: "30px",
       },
     },
   },
