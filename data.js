@@ -18,8 +18,8 @@
 
 const creatures = [
     {
-  id: "#025",                                   
-  name: "Pikachu",                              
+  id: "#025",                                                                                                                                       
+  name: "Pikachu",                                             
   type: "Électrik",                                  
   level: "25",                                
   stats: { hp: 35, attack: 55, defence: 40 },   
