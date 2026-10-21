@@ -39,6 +39,6 @@ Puis committez `dist/output.css` : GitHub Pages ne lance pas Tailwind pour vous.
 
 - **Univers choisi :** [Pokémon ]
 - **Lien GitHub Pages :** []
-- **Sources des images :** []
+- **Sources des images :** [https://www.pokebip.com/pokedex]
 - **Tests des expressions régulières :** [collez ici vos tests console : 2 valeurs valides et 2 invalides par expression]
 - **Bonus réalisés :** [liste]
