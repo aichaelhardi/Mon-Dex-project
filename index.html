@@ -12,7 +12,7 @@
   <!-- ===================== EN-TÊTE ===================== -->
     
    <header>
-    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-8 py-5">
+    <div class="flex w-full items-center justify-between gap-3 px-3 py-3 sm:px-5 lg:px-8">
       <div class="flex items-center gap-3">
         <div>
           <p class="font-display text-2xl font-extrabold leading-none"></p>
@@ -32,7 +32,7 @@
   <main class="mx-auto flex max-w-7xl flex-col gap-8 px-8 py-8">
 
     <!-- ===================== RECHERCHE ET FILTRES ===================== -->
-    <section aria-label="Recherche et filtres" class="flex flex-col gap-4">
+   <section id="grid" aria-label="Créatures" class="grid min-w-0 w-full flex-1 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h1 class="font-display text-4xl font-extrabold">Trouver une créature</h1>
         <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
@@ -40,24 +40,24 @@
           <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal">
         </label>
       </div>
-      <div id="filters" role="group" aria-label="Filtrer par type" class="flex h-11 flex-nowrap gap-2 overflow-hidden">
+      <div id="filters" role="group" aria-label="Filtrer par type" class="flex h-15 flex flex--grid gap-2 ">
           <button type="button" class="chip bg-ink text-white border-ink shrink-0">Tous</button>
-          <button type="button" class="chip shrink-0 bg-[#F97316]"> 🔥Feu</button>
-          <button type="button" class="chip shrink-0 bg-[#8B5CF6]">🐉Dragon</button>
-          <button type="button" class="chip shrink-0 bg-[#3B82F6]">💧Eau</button>
-          <button type="button" class="chip shrink-0 bg-[#A855F7]">🔮Psy</button>
-          <button type="button" class="chip shrink-0 bg-[#EAB308]">⚡Électrik</button>
-          <button type="button" class="chip shrink-0 -bg[#57534E]">🌑Ténèbres</button>
+          <button type="button" class="chip shrink-0 bg-[#F97316] text-sm"> 🔥Feu</button>
+          <button type="button" class="chip shrink-0 bg-[#8B5CF6] text-sm">🐉Dragon</button>
+          <button type="button" class="chip shrink-0 bg-[#3B82F6] text-sm">💧Eau</button>
+          <button type="button" class="chip shrink-0 bg-[#A855F7] text-sm">🔮Psy</button>
+          <button type="button" class="chip shrink-0 bg-[#EAB308] text-sm">⚡Électrik</button>
+          <button type="button" class="chip shrink-0 bg-[#57534E] text-sm">🌑Ténèbres</button>
       </div>
     </section>
 
-    <div class="flex gap-8 items-start">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-8 lg:items-start">
 
       <!-- ===================== GRILLE DES CRÉATURES ===================== -->
-      <section id="grid" aria-label="Créatures" class="grid min-w-0 flex-1 grid-cols-3 gap-5">
+      <section id="grid" aria-label="Créatures" class="grid grid-cols-1 gap-8 lg:min-w-0 lg:flex-1 lg:grid-cols-3 lg:gap-5">
 
         <!-- Carte écrite à la main : à remplacer par des cartes générées en JS (Partie 2) -->
-        <article class="flex flex-col gap-3 rounded-card bg-white p-3 pb-4">
+        <article class="flex flex-col gap-3 rounded-card bg-white p-3 pb-4 w-full h-68 md-6">
           <div class="relative flex h-36 w-full items-center justify-center rounded-xl bg-brand-light">
             <img class="h-36 w-full rounded" src="./images/pikachu.png">
             <span class="absolute left-3 top-2 font-mono text-sm text-black font-extrabold ">#025</span>
@@ -68,7 +68,7 @@
             <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">Électrik</span>
           </div>
           <p class="text-sm text-muted">Base · Total 309</p>
-          <button type="button" class="btn-outline bg-yellow">Ajouter à l'équipe</button>
+          <button type="button " class="btn-outline text-sm bg-[#F8D030]">Ajouter à l'équipe</button>
         </article>
 
         <!-- Carte écrite à la main : à remplacer par des cartes générées en JS (Partie 2) -->
@@ -82,7 +82,7 @@
             <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">Dragon</span>
           </div>
           <p class="text-sm text-muted">Base · Total 314</p>
-          <button type="button" class="btn-outline">Ajouter à l'équipe</button>
+          <button type="button" class="btn-outline text-sm bg-[#7038F8]">Ajouter à l'équipe</button>
         </article>
 
         <!-- Carte écrite à la main : à remplacer par des cartes générées en JS (Partie 2) -->
@@ -96,7 +96,7 @@
             <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">Psy</span>
           </div>
           <p class="text-sm text-muted">Base · Total 318</p>
-          <button type="button" class="btn-outline">Ajouter à l'équipe</button>
+          <button type="button" class="btn-outline text-sm bg-[#F85888]">Ajouter à l'équipe</button>
         </article>
 
         <!-- Carte écrite à la main : à remplacer par des cartes générées en JS (Partie 2) -->
@@ -110,12 +110,12 @@
             <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">Électrik</span>
           </div>
           <p class="text-sm text-muted">Niveau 1 · Total 405</p>
-          <button type="button" class="btn-outline">Ajouter à l'équipe</button>
+          <button type="button" class="btn-outline text-sm bg-[#F8D030]">Ajouter à l'équipe</button>
         </article>
 
         <!-- Carte écrite à la main : à remplacer par des cartes générées en JS (Partie 2) -->
         <article class="flex flex-col gap-3 rounded-card bg-white p-3 pb-4">
-          <div class="relative flex h-36 items-center justify-center rounded-xl bg-brand-light">
+          <div class="relative flex h-36 items-center justify-center rounded-xl  bg-brand-ligh">
            <img class="h-36 w-full rounded" src="./images/Ectoplasma.png">
             <span class="absolute left-3 top-2 font-mono text-sm text-black font-extrabold">#094</span>
           </div>
@@ -124,12 +124,12 @@
             <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">spectre</span>
           </div>
           <p class="text-sm text-muted">Niveau 1 · Total 420</p>
-          <button type="button" class="btn-outline">Ajouter à l'équipe</button>
+          <button type="button" class="btn-outline text-sm bg-[#705898]">Ajouter à l'équipe</button>
         </article>
 
         <!-- Carte écrite à la main : à remplacer par des cartes générées en JS (Partie 2) -->
         <article class="flex flex-col gap-3 rounded-card bg-white p-3 pb-4">
-          <div class="relative flex h-36 items-center justify-center rounded-xl bg-brand-light">
+          <div class="relative flex h-36 items-center justify-center rounded-xl  bg-brand-ligh">
            <img class="h-36 w-full rounded" src="./images/Lucario.png">
             <span class="absolute left-3 top-2 font-mono text-sm text-black font-extrabold">#448</span>
           </div>
@@ -138,7 +138,7 @@
             <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">Acier</span>
           </div>
           <p class="text-sm text-muted">Niveau 2 · Total 525</p>
-          <button type="button" class="btn-outline">Ajouter à l'équipe</button>
+          <button type="button" class="btn-outline text-sm bg-[#B8B8D0]">Ajouter à l'équipe</button>
         </article>
 
       </section>
@@ -148,11 +148,11 @@
         <!-- ===================== PANNEAU DE DÉTAIL ===================== -->
         <section id="detail" aria-label="Détail de la créature" class="flex flex-col gap-4 rounded-card border-2 border-ink bg-white p-6">
           <div class="flex items-center justify-between">
-            <span class="font-mono text-sm text-muted">#003 · Détail</span>
-            <button type="button" aria-label="Fermer le détail" class="btn-outline w-11 px-0">✕</button>
+            <span class="font-mono text-sm text-muted">#025 · Détail</span>
+            <button type="button" aria-label="Fermer le détail" class="btn-outline w-11 px-0 ">✕</button>
           </div>
           <div class="flex h-48 items-center justify-center rounded-2xl bg-brand-light">
-            <svg aria-hidden="true" class="h-20 w-20 text-muted" viewBox="0 0 24 24"></svg>
+            <img class="h-48 w-full rounded" src="./images/pikachu.png">
           </div>
           <div class="flex items-center justify-between">
             <h2 class="font-display text-3xl font-extrabold">Pikachu</h2>
@@ -160,9 +160,9 @@
           </div>
           <p class="text-gray-700">Un pokémon célèbre qui stocke l'électricité dans ces joues.</p>
           <div class="flex flex-col gap-2 text-sm">
-            <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span class="font-bold">PV</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[30%] rounded-full bg-brand"></span></span><span class="text-right font-mono">45</span></div>
-            <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span class="font-bold">Attaque</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[33%] rounded-full bg-brand"></span></span><span class="text-right font-mono">49</span></div>
-            <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span class="font-bold">Défense</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[43%] rounded-full bg-brand"></span></span><span class="text-right font-mono">65</span></div>
+            <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span class="font-bold">PV</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[30%] rounded-full bg-brand"></span></span><span class="text-right font-mono">35</span></div>
+            <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span class="font-bold">Attaque</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[33%] rounded-full bg-brand"></span></span><span class="text-right font-mono">55</span></div>
+            <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span class="font-bold">Défense</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[43%] rounded-full bg-brand"></span></span><span class="text-right font-mono">40</span></div>
           </div>
           <button type="button" class="btn-primary">Ajouter à l'équipe</button>
         </section>
