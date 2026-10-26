@@ -23,7 +23,7 @@ const creatures = [
   type: "Électrik",                                  
   level: "25",                                
   stats: { hp: 35, attack: 55, defence: 40 },   
-  image: "https://www.pokebip.com/pokedex-images/300/25.png",         
+  image: "images/pikachu2.png",         
   description: "Un pokémon célèbre qui stocke l'électricité dans ces joues ."        
 },
 {
@@ -32,7 +32,7 @@ const creatures = [
   type: "Feu , vol",                                 
   level: "36",                                
   stats: { hp: 78, attack: 84, defence: 78 },   
-  image: "https://www.pokebip.com/pokedex-images/300/6.png",         
+  image: "images/dracaufeu2.png",         
   description: "Un puissant pokémon qui crache des flammes brûlantes."        
 },
 {
@@ -41,7 +41,7 @@ const creatures = [
   type: "psy",                                  
   level: "70",                                
   stats: { hp: 106, attack: 110, defence: 90 },  
-  image: "https://www.pokebip.com/pokedex-images/300/150.png",        
+  image: "images/Mewtwo.png",        
   description: "un pokémon légendaire créé par manipulation génétique ."        
 },
 {
@@ -50,7 +50,7 @@ const creatures = [
   type: "Dragon,vol",                                 
   level: "55",                               
   stats: { hp: 91, attack: 134, defence: 95 },   
-  image: "https://www.pokebip.com/pokedex-images/300/149.png",         
+  image: "./images/Dracolosse.png",         
   description: "Un pokémon dragon puissant , connu par sa gentillesse."        
 },
 {
@@ -59,7 +59,7 @@ const creatures = [
   type: "spectre,poison",                                 
   level: "40",                               
   stats: { hp:60 , attack:65, defence:60  },   
-  image: "https://www.pokebip.com/pokedex-images/300/94.png",         
+  image: "images/Ectoplasma.png",         
   description: " un pokémon mystérieux qui se cache dans les ombres."        
 },
 {
@@ -68,7 +68,7 @@ const creatures = [
   type: "Combat,Acier",                                 
   level: "35",                               
   stats: { hp:70 , attack:110 , defence: 70 },   
-  image: "https://www.pokebip.com/pokedex-images/300/448.png",         
+  image: "images/Lucario.png",         
   description: "Un pokémon combattant capable de percevoir l'aura ."        
 },
 {
@@ -86,7 +86,7 @@ const creatures = [
   type: "Dragon , Sol",                                 
   level: "48",                               
   stats: { hp: 108, attack:130 , defence:95  },   
-  image: "https://www.pokebip.com/pokedex-images/300/445.png",         
+  image: "images/carchok2.png",         
   description: "Un pokémon puissant qui se déplace à très grande vitesse."        
 },
 {

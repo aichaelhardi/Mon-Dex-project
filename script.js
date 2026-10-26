@@ -18,7 +18,7 @@ function afficherCreatures(liste){
         document.createElement("article");
         carte.className="flex flex-col gap-3 rounded-[40px] bg-white p-4";
         carte.innerHTML=`<div class="relative flex h-48 items-center justify-center"> <img src="${creature.image}" alt="${creature.name}"
-        class="h-full w-full object-contain">
+        class="h-48 w-full object-contain md:h-56 lg:h-64">
         <span class="absolute left-3 top-2 font-bold text-black">
         ${creature.id}
         </span>
@@ -39,7 +39,7 @@ function afficherCreatures(liste){
         detail
         </button>
         `;
-        grid.appendChild(carte)
+        grid.appendChild(carte);
     });
 }
  afficherCreatures(creatures);
@@ -51,6 +51,7 @@ function afficherCreatures(liste){
 // Un clic sur une carte ouvre le panneau de détail :
 // image, description, et statistiques affichées en barres.
 // -------------------------------------------------------------
+
 
 
 // -------------------------------------------------------------
