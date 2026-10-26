@@ -39,7 +39,7 @@ function afficherCreatures(liste){
         detail
         </button>
         `;
-        grid.appendChild(carte);
+        grid.appendChild(carte)
     });
 }
  afficherCreatures(creatures);
