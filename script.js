@@ -34,15 +34,20 @@ function afficherCreatures(liste){
         <button
         type="button"
         class="btn-outline ajouter à l'equipe-btn"
-        data-id="${creature.id}"
         >
         ajouter à l'equipe
         </button>
         `;
-        grid.appendChild(carte);
+        carte.addEventListener("click",function() {
+            showDetail(creature);
+        });
+    grid.appendChild(carte);
     });
 }
- afficherCreatures(creatures);
+    afficherCreatures(creatures);
+
+   
+
 
 
 
@@ -51,6 +56,41 @@ function afficherCreatures(liste){
 // Un clic sur une carte ouvre le panneau de détail :
 // image, description, et statistiques affichées en barres.
 // -------------------------------------------------------------
+const detail=
+document.getElementById("detail");
+const closeDetail=document.getElementById("closeDetail");
+function showDetail(creature) {
+    if(!detail||!creature)
+       return;
+
+document.getElementById("detail-name").textContent =creature.name;
+document.getElementById("detail-id").textContent =creature.id;
+document.getElementById("detail-type").textContent ="Type: "+creature.type;
+document.getElementById("detail-level").textContent= "Niveau: "+creature.level;
+document.getElementById("detail-image").src=creature.image;
+document.getElementById("detail-description").textContent=creature.description;
+document.getElementById("detail-hp").textContent=creature.stats.hp;
+document.getElementById("detail-attack").textContent=creature.stats.attack;
+document.getElementById("detail-defence").textContent=creature.stats.defence;
+detail.classList.remove("hidden");
+}
+if(closeDetail&&detail){
+closeDetail.addEventListener("click",function(){
+     detail.classList.add("hidden");
+});
+}
+showDetail(creatures);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
