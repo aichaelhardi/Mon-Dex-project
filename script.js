@@ -4,13 +4,46 @@
 // Les données viennent de data.js (la constante `creatures`).
 // Écrivez votre code ici, fonctionnalité par fonctionnalité.
 // Une carte GitHub Projects et au moins un commit par fonctionnalité.
-
-
 // -------------------------------------------------------------
 // 1. AFFICHAGE
 // Supprimez les cartes écrites à la main dans index.html et
 // construisez la grille à partir du tableau `creatures`.
 // -------------------------------------------------------------
+const grid=
+document.getElementById("grid");
+function afficherCreatures(liste){
+    grid.innerHTML="";
+    liste.forEach(function(creature){
+        const carte=
+        document.createElement("article");
+        carte.className="flex flex-col gap-3 rounded-[40px] bg-white p-4";
+        carte.innerHTML=`<div class="relative flex h-48 items-center justify-center"> <img src="${creature.image}" alt="${creature.name}"
+        class="h-full w-full object-contain">
+        <span class="absolute left-3 top-2 font-bold text-black">
+        ${creature.id}
+        </span>
+        </div>
+        <h3 class="text-xl font-bold">${creature.name}</h3>
+        <p>Type :${creature.type}</p>
+        <p>Niveau:${creature.level}</p>
+        <p> Total:${
+            creature.stats.hp +
+            creature.stats.attack+
+            creature.stats.defence
+        }</p>
+        <button
+        type="button"
+        class="btn-outline detail-btn"
+        data-id="${creature.id}"
+        >
+        detail
+        </button>
+        `;
+        grid.appendChild(carte);
+    });
+}
+ afficherCreatures(creatures);
+
 
 
 // -------------------------------------------------------------

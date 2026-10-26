@@ -41,7 +41,7 @@ const creatures = [
   type: "psy",                                  
   level: "70",                                
   stats: { hp: 106, attack: 110, defence: 90 },  
-  image: "hhttps://www.pokebip.com/pokedex-images/300/150.png",        
+  image: "https://www.pokebip.com/pokedex-images/300/150.png",        
   description: "un pokémon légendaire créé par manipulation génétique ."        
 },
 {
