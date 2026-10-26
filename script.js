@@ -33,10 +33,10 @@ function afficherCreatures(liste){
         }</p>
         <button
         type="button"
-        class="btn-outline detail-btn"
+        class="btn-outline ajouter à l'equipe-btn"
         data-id="${creature.id}"
         >
-        detail
+        ajouter à l'equipe
         </button>
         `;
         grid.appendChild(carte);

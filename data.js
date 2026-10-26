@@ -41,7 +41,7 @@ const creatures = [
   type: "psy",                                  
   level: "70",                                
   stats: { hp: 106, attack: 110, defence: 90 },  
-  image: "images/Mewtwo.png",        
+  image: "images/mewto2.png",        
   description: "un pokémon légendaire créé par manipulation génétique ."        
 },
 {
@@ -50,7 +50,7 @@ const creatures = [
   type: "Dragon,vol",                                 
   level: "55",                               
   stats: { hp: 91, attack: 134, defence: 95 },   
-  image: "./images/Dracolosse.png",         
+  image: "images/dracolosse2.png",         
   description: "Un pokémon dragon puissant , connu par sa gentillesse."        
 },
 {
@@ -59,16 +59,17 @@ const creatures = [
   type: "spectre,poison",                                 
   level: "40",                               
   stats: { hp:60 , attack:65, defence:60  },   
-  image: "images/Ectoplasma.png",         
+  image: "images/ectoplama2.png",         
   description: " un pokémon mystérieux qui se cache dans les ombres."        
-},
+},                                                                               
+    
 {
   id: "#448",                                  
   name: "Lucario",                             
   type: "Combat,Acier",                                 
   level: "35",                               
   stats: { hp:70 , attack:110 , defence: 70 },   
-  image: "images/Lucario.png",         
+  image: "images/lucario2.png",         
   description: "Un pokémon combattant capable de percevoir l'aura ."        
 },
 {
@@ -77,7 +78,7 @@ const creatures = [
   type: "Dragon,vol",                                 
   level: "70",                               
   stats: { hp:105 , attack: 150, defence: 90 },   
-  image: "https://www.pokebip.com/pokedex-images/300/384.png",         
+  image: "images/rayquaza2.png",         
   description: "Un pokémon légendaire qui vit dans la haute atmosphère."        
 },
 {
@@ -95,7 +96,7 @@ const creatures = [
   type: "psy",                                 
   level: "50",                               
   stats: { hp: 100, attack:100 , defence:100  },   
-  image: "https://www.pokebip.com/pokedex-images/300/151.png",         
+  image: "images/mew2.png",         
   description: "Un pokémon rare qui posséde un patrimoine génétique exceptionnel."        
 },
 {
@@ -104,7 +105,7 @@ const creatures = [
   type: "Normal",                                 
   level: "35",                               
   stats: { hp:160 , attack:110 , defence: 65 },   
-  image: "https://www.pokebip.com/pokedex-images/300/143.png",         
+  image: "images/ronflex2.png",         
   description: "Un pokémon géant qui passe beaucoup de temps à dormir et à manger."        
 },
 {
@@ -113,7 +114,7 @@ const creatures = [
   type: "Eau, ténèbres",                                 
   level: "36",                               
   stats: { hp:72 , attack:95 , defence:67  },   
-  image: "https://www.pokebip.com/pokedex-images/300/658.png",         
+  image: "images/amphi2.png",         
   description: "Un pokémon ninja très rapide qui utilise des attaques d'eau."        
 },
 {
@@ -122,7 +123,7 @@ const creatures = [
   type: "Normal",                                 
   level: "15",                               
   stats: { hp: 55, attack:55 , defence: 50 },   
-  image: "https://www.pokebip.com/pokedex-images/300/133.png",         
+  image: "images/evoli2.png",         
   description: "Un pokémon connu pour ses nombreuses évolutions possibles."        
 },
 
