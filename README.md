@@ -40,5 +40,13 @@ Puis committez `dist/output.css` : GitHub Pages ne lance pas Tailwind pour vous.
 - **Univers choisi :** [Pokémon ]
 - **Lien GitHub Pages :** [https://aichaelhardi.github.io/Mon-Dex-project/]
 - **Sources des images :** [https://www.pokebip.com/pokedex]
-- **Tests des expressions régulières :** [collez ici vos tests console : 2 valeurs valides et 2 invalides par expression]
+- **Tests des expressions régulières :** [const idRegex=/^[0-9]+$/;
+console.log(idRegex.test("25"));
+ true
+console.log(idRegex.test("001"));
+ true
+console.log(idRegex.test("abc"));
+ false
+console.log(idRegex.test("12a")); false
+]
 - **Bonus réalisés :** [liste]
