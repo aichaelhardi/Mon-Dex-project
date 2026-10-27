@@ -8,7 +8,7 @@
 const grid = document.getElementById("grid");
 const creaturesContainer = document.getElementById("grid");
 const teamContainer = document.getElementById('team-container');
-const teamCounter = document.getElementById('team-count'); // Cible l'ID de votre en-tête
+const teamCounter = document.getElementById('team-count');
 
 // Tableaux de données
 let creaturesList = [...creatures]; // Initialisé avec les données de data.js
@@ -27,7 +27,6 @@ function afficherCreatures(liste) {
         carte.className = "creature-card flex flex-col gap-3 rounded-[40px] bg-white p-4 shadow-md transition-all duration-300";
         carte.dataset.id = creature.id;
 
-        // Vérifie si la créature est déjà dans l'équipe pour garder son état visuel
         const isInTeam = teamList.some(c => c.id === creature.id);
         if (isInTeam) {
             carte.classList.add('in-team');
@@ -51,7 +50,6 @@ function afficherCreatures(liste) {
             </button>
         `;
 
-        // Événement pour ouvrir le détail (sauf si on clique sur le bouton équipe)
         carte.addEventListener("click", function (e) {
             if (e.target.closest('.btn-equipe')) return;
             showDetail(creature);
@@ -61,7 +59,6 @@ function afficherCreatures(liste) {
     });
 }
 
-// Premier affichage au chargement
 afficherCreatures(creaturesList);
 
 
@@ -98,26 +95,23 @@ if (closeDetail && detail) {
 
 
 // -------------------------------------------------------------
-// 3. RECHERCHE ET FILTRES
+// 3. RECHERCHE ET FILTRES (Conservés tels quels)
 // -------------------------------------------------------------
 function filtrerCreatures() {
-    const filterdiv = document.querySelector("#filterButtons");
+    afficherCreatures(creatures);
+    const filterdiv = document.querySelector("#filterButtons")
     if (!filterdiv) return;
 
     filterdiv.addEventListener('click', (event) => {
-        const btn = event.target.closest(".chip");
+        const btn = event.target.closest(".chip")
         if (!btn) return;
-
-        const allFilterBtns = filterdiv.querySelectorAll('.chip');
-        allFilterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const nametype = btn.textContent.toLowerCase().trim();
+        const nametype = btn.textContent.toLowerCase().trim()
         if (nametype === 'all') {
-            afficherCreatures(creaturesList);
-            return;
-        } else {
-            const resultats = creaturesList.filter((c) => c.type.toLowerCase().trim() === nametype);
+            afficherCreatures(creatures);
+            return
+        }
+        else {
+            const resultats = creatures.filter((c) => c.type.toLowerCase().trim() === nametype)
             afficherCreatures(resultats);
         }
     });
@@ -130,17 +124,32 @@ function searchCreatures() {
 
     searchInput.addEventListener("input", function () {
         const searchValue = searchInput.value.toLowerCase().trim();
-        const filteredCreatures = creaturesList.filter((c) => 
-            c.name.toLowerCase().trim().includes(searchValue)
-        );
-        afficherCreatures(filteredCreatures);
+        let filteredCreatures = [];
+        
+        if (searchValue !== "") {
+            creatures.forEach((c) => {
+                if (c.name.toLowerCase().trim().includes(searchValue))
+                    filteredCreatures.push(c)
+            })
+            afficherCreatures(filteredCreatures)
+        } else {
+            afficherCreatures(creatures);
+        }
+
+        const filterButtons = document.querySelectorAll('#filterButtons button');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
     });
-} 
+}; 
 searchCreatures();
 
 
 // -------------------------------------------------------------
-// 5. CRÉER UNE CRÉATURE (FORMULAIRE ET VALIDATION)
+// 5. CRÉER UNE CRÉATURE
 // -------------------------------------------------------------
 const form = document.getElementById('creature-form');
 const inputs = form ? form.querySelectorAll('input, select, textarea') : [];
@@ -276,7 +285,7 @@ if (form) {
 
 
 // -------------------------------------------------------------
-// 6. MON ÉQUIPE (Délégation d'événements et 6 emplacements fixes)
+// 6. MON ÉQUIPE & RÈGLES (Anti-doublons, Max 6, Délégation)
 // -------------------------------------------------------------
 
 // 1. Écouteur unique sur la grille principale
@@ -295,10 +304,17 @@ if (creaturesContainer) {
         const isInTeam = teamList.some(c => c.id === creatureId);
 
         if (!isInTeam) {
+            // Règle : Maximum 6 créatures
             if (teamList.length >= 6) {
                 alert("Votre équipe est complète (6/6 maximum) !");
                 return;
             }
+            // Règle : Pas de doublon (sécurité supplémentaire)
+            if (teamList.some(c => c.id === creature.id)) {
+                alert("Cette créature est déjà dans votre équipe !");
+                return;
+            }
+
             teamList.push(creature);
             card.classList.add('in-team');
             btnEquipe.textContent = "Retirer de l'équipe";
@@ -340,7 +356,6 @@ if (teamContainer) {
 
 // 3. Fonction de mise à jour des emplacements de l'équipe et du compteur
 function renderTeam() {
-    // Met à jour le compteur dans l'en-tête (ex: "0" sur "0/6")
     if (teamCounter) {
         teamCounter.textContent = teamList.length;
     }
@@ -348,12 +363,10 @@ function renderTeam() {
     if (!teamContainer) return;
     teamContainer.innerHTML = '';
 
-    // Boucle fixe pour garantir les 6 emplacements
     for (let i = 0; i < 6; i++) {
         const creature = teamList[i];
 
         if (creature) {
-            // Emplacement rempli
             const filledSlot = document.createElement('div');
             filledSlot.className = "team-filled-slot relative flex flex-col items-center justify-between p-3 h-36 bg-white border-2 border-blue-500 rounded-xl shadow-md cursor-pointer group transition hover:border-red-500";
             filledSlot.dataset.id = creature.id;
@@ -366,7 +379,6 @@ function renderTeam() {
             `;
             teamContainer.appendChild(filledSlot);
         } else {
-            // Emplacement vide
             const emptySlot = document.createElement('div');
             emptySlot.className = "team-slot flex flex-col items-center justify-center h-36 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold bg-gray-50/50";
             emptySlot.innerHTML = `<span class="text-gray-300 font-bold mb-1">0${i+1}</span> Emplacement`;
@@ -375,5 +387,4 @@ function renderTeam() {
     }
 }
 
-// Appel initial pour afficher les 6 emplacements vides au chargement
 renderTeam();
