@@ -95,7 +95,26 @@ function filtrerCreatures() {
 
     });
 } filtrerCreatures(creatures);
+function searchCreatures() {
+    const searchInput = document.getElementById("search");
 
+    searchInput.addEventListener("input", function () {
+        const searchValue = searchInput.value.toLowerCase().trim();
+        if (searchValue===""){
+
+         }
+        else {
+            const filteredCreatures = []
+            creatures.forEach((c) => {
+                if (c.name.toLowerCase().trim().includes(searchValue))
+                    filteredCreatures.push(c)
+            })
+            afficherCreatures(filteredCreatures)
+            
+        }
+
+    });
+};searchCreatures(creatures);
 // -------------------------------------------------------------
 // 5. CRÉER UNE CRÉATURE
 // Validez chaque champ du formulaire avec une expression régulière
