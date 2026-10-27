@@ -29,7 +29,7 @@ const creatures = [
 {
   id: "#006",                                   
   name: "Dracaufeu",                             
-  type: "Feu , vol",                                 
+  type: "Feu ",                                 
   level: "36",                                
   stats: { hp: 78, attack: 84, defence: 78 },   
   image: "images/dracaufeu2.png",         
@@ -47,7 +47,7 @@ const creatures = [
 {
   id: "#149",                                  
   name: "Dracolosse",                             
-  type: "Dragon,vol",                                 
+  type: "Dragon",                                 
   level: "55",                               
   stats: { hp: 91, attack: 134, defence: 95 },   
   image: "images/dracolosse2.png",         
@@ -56,7 +56,7 @@ const creatures = [
 {
   id: "#094",                                  
   name: "Ectoplasma",                             
-  type: "spectre,poison",                                 
+  type: "spectre",                                 
   level: "40",                               
   stats: { hp:60 , attack:65, defence:60  },   
   image: "images/ectoplama2.png",         
@@ -66,7 +66,7 @@ const creatures = [
 {
   id: "#448",                                  
   name: "Lucario",                             
-  type: "Combat,Acier",                                 
+  type: "Acier",                                 
   level: "35",                               
   stats: { hp:70 , attack:110 , defence: 70 },   
   image: "images/lucario2.png",         
@@ -75,7 +75,7 @@ const creatures = [
 {
   id: "#384",                                  
   name: "Rayquaza",                             
-  type: "Dragon,vol",                                 
+  type: "Dragon",                                 
   level: "70",                               
   stats: { hp:105 , attack: 150, defence: 90 },   
   image: "images/rayquaza2.png",         
@@ -84,7 +84,7 @@ const creatures = [
 {
   id: "#445",                                  
   name: "Carchacrok",                             
-  type: "Dragon , Sol",                                 
+  type: "Dragon ",                                 
   level: "48",                               
   stats: { hp: 108, attack:130 , defence:95  },   
   image: "images/carchok2.png",         
@@ -111,7 +111,7 @@ const creatures = [
 {
   id: "#658",                                  
   name: "Amphinobi",                             
-  type: "Eau, ténèbres",                                 
+  type: "Eau",                                 
   level: "36",                               
   stats: { hp:72 , attack:95 , defence:67  },   
   image: "images/amphi2.png",         
