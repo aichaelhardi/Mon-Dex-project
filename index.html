@@ -85,12 +85,27 @@
         </section>
 
         <!-- ===================== MON ÉQUIPE (INCOMPLÈTE) ===================== -->
-        <section id="team" aria-label="Mon équipe" class="rounded-card bg-white p-6">
-          <h2 class="font-display text-2xl font-extrabold">Mon équipe</h2>
-          <!-- TODO (Partie 1) : terminez cette section en suivant la maquette :
-               compteur x/6, 6 emplacements (vides ou remplis), message de règles. -->
-        </section>
-        </div>
+        <section id="team" aria-label="Mon équipe" class="flex flex-col gap-4 rounded-card bg-white p-6 shadow-md">
+  <!-- En-tête avec le titre et le compteur dynamique -->
+  <div class="flex items-center justify-between">
+    <h2 class="font-display text-2xl font-extrabold">Mon équipe</h2>
+    <span id="team-counter" class="text-sm font-bold text-muted bg-gray-100 px-3 py-1 rounded-full">0/6</span>
+  </div>
+
+  <!-- Message de règles -->
+  <p class="text-xs text-muted">Sélectionnez jusqu'à 6 créatures pour constituer votre équipe de combat.</p>
+
+  <!-- Grille des 6 emplacements (vides ou remplis) -->
+  <div id="team-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+    <!-- Les 6 emplacements vides par défaut -->
+    <div class="team-slot flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold">Emplacement vide</div>
+    <div class="team-slot flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold">Emplacement vide</div>
+    <div class="team-slot flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold">Emplacement vide</div>
+    <div class="team-slot flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold">Emplacement vide</div>
+    <div class="team-slot flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold">Emplacement vide</div>
+    <div class="team-slot flex flex-col items-center justify-center h-32 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold">Emplacement vide</div>
+  </div>
+</section>
 
     <!-- ===================== FORMULAIRE DE CRÉATION ===================== -->
     <section id="create" aria-label="Nouvelle créature" class="flex flex-col gap-6 rounded-card bg-white p-8">

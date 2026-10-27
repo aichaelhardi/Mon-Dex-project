@@ -2,56 +2,77 @@
 // script.js — Mon Dex
 // =============================================================
 // Les données viennent de data.js (la constante `creatures`).
-// Écrivez votre code ici, fonctionnalité par fonctionnalité.
-// Une carte GitHub Projects et au moins un commit par fonctionnalité.
 // -------------------------------------------------------------
-// 1. AFFICHAGE
-// Supprimez les cartes écrites à la main dans index.html et
-// construisez la grille à partir du tableau `creatures`.
-// -------------------------------------------------------------
+
+// Conteneurs principaux du DOM
 const grid = document.getElementById("grid");
+const creaturesContainer = document.getElementById("grid");
+const teamContainer = document.getElementById('team-container');
+const teamCounter = document.getElementById('team-count'); // Cible l'ID de votre en-tête
+
+// Tableaux de données
+let creaturesList = [...creatures]; // Initialisé avec les données de data.js
+let teamList = [];                  // Tableau stockant les créatures de l'équipe (max 6)
+
+
+// -------------------------------------------------------------
+// 1. AFFICHAGE DES CRÉATURES
+// -------------------------------------------------------------
 function afficherCreatures(liste) {
+    if (!grid) return;
     grid.innerHTML = "";
 
     liste.forEach(function (creature) {
-        const carte =
-            document.createElement("article");
-        carte.className = "flex flex-col gap-3 rounded-[40px] bg-white p-4";
-        carte.innerHTML = `
-  <img src="${creature.image}" alt="${creature.name}" class="h-40 w-full object-cover rounded-lg">
-  <div class="flex justify-between items-center">
-    <span class="text-xs font-bold text-muted">${creature.id}</span>
-    <span class="px-2 py-1 text-xs font-bold rounded bg-gray-100">${creature.type}</span>
-  </div>
-  <h3 class="font-display text-xl font-bold">${creature.name}</h3>
-  
-  <div class="text-xs text-muted flex gap-2">
-   
-    
-  
-  <!-- LE BOUTON AJOUTER À L'ÉQUIPE -->
-      <button type="button" class="btn-equipe w-full py-2.5 rounded-xl border-2 border-gray-800 font-bold text-gray-800 transition hover:bg-gray-900 hover:text-white">
-        ajouter à l'équipe
-      </button>
+        const carte = document.createElement("article");
+        carte.className = "creature-card flex flex-col gap-3 rounded-[40px] bg-white p-4 shadow-md transition-all duration-300";
+        carte.dataset.id = creature.id;
 
-    `;
-  carte.addEventListener("click", function () {
+        // Vérifie si la créature est déjà dans l'équipe pour garder son état visuel
+        const isInTeam = teamList.some(c => c.id === creature.id);
+        if (isInTeam) {
+            carte.classList.add('in-team');
+        }
+
+        carte.innerHTML = `
+            <img src="${creature.image}" alt="${creature.name}" class="h-40 w-full object-cover rounded-lg">
+            <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-muted">${creature.id}</span>
+                <span class="px-2 py-1 text-xs font-bold rounded bg-gray-100">${creature.type}</span>
+            </div>
+            <h3 class="font-display text-xl font-bold">${creature.name}</h3>
+            
+            <div class="text-xs text-muted flex gap-2">
+                <span>Niveau : ${creature.level}</span>
+            </div>
+
+            <!-- LE BOUTON AJOUTER À L'ÉQUIPE -->
+            <button type="button" class="btn-equipe w-full py-2.5 rounded-xl border-2 border-gray-800 font-bold text-gray-800 transition hover:bg-gray-900 hover:text-white ${isInTeam ? 'active bg-blue-600 text-white' : ''}">
+                ${isInTeam ? "Retirer de l'équipe" : "ajouter à l'équipe"}
+            </button>
+        `;
+
+        // Événement pour ouvrir le détail (sauf si on clique sur le bouton équipe)
+        carte.addEventListener("click", function (e) {
+            if (e.target.closest('.btn-equipe')) return;
             showDetail(creature);
         });
+
         grid.appendChild(carte);
     });
-}afficherCreatures(creatures)
+}
+
+// Premier affichage au chargement
+afficherCreatures(creaturesList);
+
 
 // -------------------------------------------------------------
 // 2. DÉTAIL
-// Un clic sur une carte ouvre le panneau de détail :
-// image, description, et statistiques affichées en barres.
 // -------------------------------------------------------------
 const detail = document.getElementById("detail");
 const closeDetail = document.getElementById("closeDetail");
+
 function showDetail(creature) {
-    if (!detail || !creature)
-        return;
+    if (!detail || !creature) return;
 
     document.getElementById("detail-name").textContent = creature.name;
     document.getElementById("detail-id").textContent = creature.id;
@@ -59,87 +80,71 @@ function showDetail(creature) {
     document.getElementById("detail-level").textContent = "Niveau: " + creature.level;
     document.getElementById("detail-image").src = creature.image;
     document.getElementById("detail-description").textContent = creature.description;
-    document.getElementById("detail-hp").textContent = creature.stats.hp;
-    document.getElementById("detail-attack").textContent = creature.stats.attack;
-    document.getElementById("detail-defence").textContent = creature.stats.defence;
+    
+    if(creature.stats) {
+        document.getElementById("detail-hp").textContent = creature.stats.hp;
+        document.getElementById("detail-attack").textContent = creature.stats.attack;
+        document.getElementById("detail-defence").textContent = creature.stats.defence;
+    }
+    
     detail.classList.remove("hidden");
 }
+
 if (closeDetail && detail) {
     closeDetail.addEventListener("click", function () {
         detail.classList.add("hidden");
     });
 }
 
-// -------------------------------------------------------------
-// 3. RECHERCHE
-// La liste se met à jour pendant la saisie d'un nom
-// (sans tenir compte des majuscules).
-// -------------------------------------------------------------
 
+// -------------------------------------------------------------
+// 3. RECHERCHE ET FILTRES
+// -------------------------------------------------------------
 function filtrerCreatures() {
-    afficherCreatures(creatures);
-    const filterdiv = document.querySelector("#filterButtons")
+    const filterdiv = document.querySelector("#filterButtons");
+    if (!filterdiv) return;
+
     filterdiv.addEventListener('click', (event) => {
-        const btn = event.target.closest(".chip")
-        const nametype = btn.textContent.toLowerCase().trim()
+        const btn = event.target.closest(".chip");
+        if (!btn) return;
+
+        const allFilterBtns = filterdiv.querySelectorAll('.chip');
+        allFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const nametype = btn.textContent.toLowerCase().trim();
         if (nametype === 'all') {
-            afficherCreatures(creatures);
-            return
-        }
-        else {
-            const resultats = creatures.filter((c) => c.type.toLowerCase().trim() === nametype)
+            afficherCreatures(creaturesList);
+            return;
+        } else {
+            const resultats = creaturesList.filter((c) => c.type.toLowerCase().trim() === nametype);
             afficherCreatures(resultats);
         }
-
     });
-} filtrerCreatures(creatures);
+} 
+filtrerCreatures();
+
 function searchCreatures() {
     const searchInput = document.getElementById("search");
+    if (!searchInput) return;
 
     searchInput.addEventListener("input", function () {
         const searchValue = searchInput.value.toLowerCase().trim();
-        if (searchValue === "") {
-
-        }
-        else {
-            const filteredCreatures = []
-            creatures.forEach((c) => {
-                if (c.name.toLowerCase().trim().includes(searchValue))
-                    filteredCreatures.push(c)
-            })
-            afficherCreatures(filteredCreatures)
-
-        }
-        const filterButtons = document.querySelectorAll('#filterButtons button');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Retire la classe 'active' de tous les boutons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-
-                // Ajoute la classe 'active' uniquement sur le bouton cliqué
-                button.classList.add('active');
-            });
-            afficherCreatures(filteredCreatures)
-        });
-
+        const filteredCreatures = creaturesList.filter((c) => 
+            c.name.toLowerCase().trim().includes(searchValue)
+        );
+        afficherCreatures(filteredCreatures);
     });
-}; searchCreatures(creatures);
+} 
+searchCreatures();
+
+
 // -------------------------------------------------------------
-// 5. CRÉER UNE CRÉATURE
-// Validez chaque champ du formulaire avec une expression régulière
-// (voir le tableau du brief). Affichez le message d'erreur sous le
-// champ, et n'ajoutez jamais une créature invalide.
+// 5. CRÉER UNE CRÉATURE (FORMULAIRE ET VALIDATION)
 // -------------------------------------------------------------
-// Sélection du formulaire et des champs
-// Sélection du formulaire et des champs
 const form = document.getElementById('creature-form');
-const inputs = form.querySelectorAll('input, select, textarea');
+const inputs = form ? form.querySelectorAll('input, select, textarea') : [];
 
-// Tableau principal des créatures
-let creaturesList = [];
-
-// Définition des règles et des expressions régulières exactes
 const rules = {
     id: {
         regex: /^#\d{3}$/,
@@ -163,7 +168,7 @@ const rules = {
     },
     stat2: {
         regex: /^\d{1,3}$/,
-        message: "Doit être un nombre entier de 0 a 999."
+        message: "Doit être un nombre entier de 0 à 999."
     },
     stat3: {
         regex: /^\d{1,3}$/,
@@ -178,16 +183,14 @@ const rules = {
         message: "La description doit contenir entre 10 et 200 caractères."
     }
 };
+
 function displayError(inputElement, message) {
     const errorSpan = inputElement.parentElement.querySelector('.error-message');
-    if (message) {
+    if (errorSpan) {
         errorSpan.textContent = message;
-    } else {
-        errorSpan.textContent = '';
     }
 }
 
-// Fonction de validation d'un champ unique
 function validateField(inputElement) {
     const fieldName = inputElement.name;
     const fieldValue = inputElement.value.trim();
@@ -222,106 +225,155 @@ function validateField(inputElement) {
     }
 }
 
-// Validation en temps réel
 inputs.forEach(input => {
     input.addEventListener('input', () => validateField(input));
     input.addEventListener('change', () => validateField(input));
 });
 
-// Soumission du formulaire
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+if (form) {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    let isFormValid = true;
-    const newCreatureData = {};
+        let isFormValid = true;
+        const newCreatureData = {};
 
-    inputs.forEach(input => {
-        const isValid = validateField(input);
-        if (!isValid) {
-            isFormValid = false;
+        inputs.forEach(input => {
+            const isValid = validateField(input);
+            if (!isValid) {
+                isFormValid = false;
+            } else {
+                newCreatureData[input.name] = input.value.trim();
+            }
+        });
+
+        if (isFormValid) {
+            const formattedCreature = {
+                id: newCreatureData.id,
+                name: newCreatureData.name,
+                type: newCreatureData.type,
+                level: newCreatureData.level,
+                image: newCreatureData.image,
+                description: newCreatureData.description,
+                stats: {
+                    hp: newCreatureData.stat1 || "0",
+                    attack: newCreatureData.stat2 || "0",
+                    defence: newCreatureData.stat3 || "0"
+                }
+            };
+
+            creaturesList.push(formattedCreature);
+            afficherCreatures(creaturesList);
+
+            alert("Créature ajoutée avec succès !");
+
+            form.reset();
+            inputs.forEach(input => displayError(input, ''));
         } else {
-            newCreatureData[input.name] = input.value.trim();
+            alert("Le formulaire ne peut pas être envoyé tant qu'un champ est invalide.");
         }
     });
-
-    if (isFormValid) {
-        // 1. Ajout effectif dans le tableau
-        creaturesList.push(newCreatureData);
-
-        // 2. Vérification dans la console pour voir qu'il s'ajoute bien
-        console.log("Créature ajoutée avec succès ! Tableau mis à jour :", creaturesList);
-
-        alert("Créature ajoutée avec succès !");
-
-        // 3. Réinitialisation
-        form.reset();
-        inputs.forEach(input => displayError(input, ''));
-
-        // (Optionnel) Si vous avez une fonction qui affiche les cartes/la liste sur la page, appelez-la ici :
-        // afficherLesCreatures(); 
-    } else {
-        alert("Le formulaire ne peut pas être envoyé tant qu'un champ est invalide.");
-    }
-});
-// 1. Sélectionner l'élément conteneur dans le DOM
-const creaturesContainer = document.getElementById('creatures-container');
+}
 
 
-function renderCreatures() {
-    
-    creaturesContainer.innerHTML = '';
+// -------------------------------------------------------------
+// 6. MON ÉQUIPE (Délégation d'événements et 6 emplacements fixes)
+// -------------------------------------------------------------
 
-    // Parcourir le tableau des créatures
-    creaturesList.forEach(creature => {
-        // Créer une carte (div) pour chaque créature
-        const card = document.createElement('div');
-        card.className = "flex flex-col gap-3 rounded-card bg-white p-6 shadow-md border border-line";
-        card.innerHTML = `
-        < img src = "${creature.image}" alt = "${creature.name}" class="h-40 w-full object-cover rounded-lg" >
-      <div class="flex justify-between items-center">
-        <span class="text-xs font-bold text-muted">${creature.id}</span>
-        <span class="px-2 py-1 text-xs font-bold rounded bg-gray-100">${creature.type}</span>
-      </div>
-      <h3 class="font-display text-xl font-bold">${creature.name}</h3>
-      <p class="text-sm text-muted">Niveau : ${creature.level}</p>
-      <div class="text-xs text-muted flex gap-2">
-        <span>S1: ${creature.stat1}</span>
-        <span>S2: ${creature.stat2}</span>
-        <span>S3: ${creature.stat3}</span>
-      </div>
-      <p class="text-sm mt-2">${creature.description}</p>
-    `;
-        creaturesContainer.appendChild(card);
+// 1. Écouteur unique sur la grille principale
+if (creaturesContainer) {
+    creaturesContainer.addEventListener('click', (event) => {
+        const btnEquipe = event.target.closest('.btn-equipe');
+        if (!btnEquipe) return;
+
+        const card = btnEquipe.closest('.creature-card');
+        if (!card) return;
+
+        const creatureId = card.dataset.id;
+        const creature = creaturesList.find(c => c.id === creatureId);
+        if (!creature) return;
+
+        const isInTeam = teamList.some(c => c.id === creatureId);
+
+        if (!isInTeam) {
+            if (teamList.length >= 6) {
+                alert("Votre équipe est complète (6/6 maximum) !");
+                return;
+            }
+            teamList.push(creature);
+            card.classList.add('in-team');
+            btnEquipe.textContent = "Retirer de l'équipe";
+            btnEquipe.classList.add('active', 'bg-blue-600', 'text-white');
+        } else {
+            teamList = teamList.filter(c => c.id !== creatureId);
+            card.classList.remove('in-team');
+            btnEquipe.textContent = "ajouter à l'équipe";
+            btnEquipe.classList.remove('active', 'bg-blue-600', 'text-white');
+        }
+
+        renderTeam();
     });
 }
-if (isFormValid) {
-    creaturesList.push(newCreatureData);
-    renderCreatures();
 
-    alert("Créature ajoutée avec succès !");
+// 2. Écouteur unique sur la section équipe
+if (teamContainer) {
+    teamContainer.addEventListener('click', (event) => {
+        const slot = event.target.closest('.team-filled-slot');
+        if (!slot) return;
 
-    form.reset();
-    inputs.forEach(input => displayError(input, ''));
-};
+        const creatureId = slot.dataset.id;
 
+        teamList = teamList.filter(c => c.id !== creatureId);
 
+        const cardInGrid = creaturesContainer.querySelector(`[data-id="${creatureId}"]`);
+        if (cardInGrid) {
+            cardInGrid.classList.remove('in-team');
+            const btn = cardInGrid.querySelector('.btn-equipe');
+            if (btn) {
+                btn.textContent = "ajouter à l'équipe";
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+            }
+        }
 
+        renderTeam();
+    });
+}
 
+// 3. Fonction de mise à jour des emplacements de l'équipe et du compteur
+function renderTeam() {
+    // Met à jour le compteur dans l'en-tête (ex: "0" sur "0/6")
+    if (teamCounter) {
+        teamCounter.textContent = teamList.length;
+    }
 
-// -------------------------------------------------------------
-// 6. MON ÉQUIPE
-// Boutons « Ajouter à l'équipe » et « Retirer », gérés avec UN SEUL
-// écouteur sur la grille et UN SEUL sur l'équipe (délégation).
-// -------------------------------------------------------------
+    if (!teamContainer) return;
+    teamContainer.innerHTML = '';
 
+    // Boucle fixe pour garantir les 6 emplacements
+    for (let i = 0; i < 6; i++) {
+        const creature = teamList[i];
 
-// -------------------------------------------------------------
-// 7. RÈGLES DE L'ÉQUIPE
-// 6 créatures au maximum, pas de doublon, un message clair quand
-// une action est refusée, et un compteur (x/6).
-// -------------------------------------------------------------
+        if (creature) {
+            // Emplacement rempli
+            const filledSlot = document.createElement('div');
+            filledSlot.className = "team-filled-slot relative flex flex-col items-center justify-between p-3 h-36 bg-white border-2 border-blue-500 rounded-xl shadow-md cursor-pointer group transition hover:border-red-500";
+            filledSlot.dataset.id = creature.id;
+            
+            filledSlot.innerHTML = `
+                <span class="absolute top-1 left-2 text-[10px] font-bold text-gray-400">#0${i+1}</span>
+                <img src="${creature.image}" alt="${creature.name}" class="w-12 h-12 object-cover rounded-lg mt-2">
+                <span class="text-xs font-bold text-gray-800 truncate w-full text-center">${creature.name}</span>
+                <span class="text-[10px] bg-red-100 text-red-600 font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">Retirer</span>
+            `;
+            teamContainer.appendChild(filledSlot);
+        } else {
+            // Emplacement vide
+            const emptySlot = document.createElement('div');
+            emptySlot.className = "team-slot flex flex-col items-center justify-center h-36 border-2 border-dashed border-gray-300 rounded-xl text-gray-400 text-xs font-semibold bg-gray-50/50";
+            emptySlot.innerHTML = `<span class="text-gray-300 font-bold mb-1">0${i+1}</span> Emplacement`;
+            teamContainer.appendChild(emptySlot);
+        }
+    }
+}
 
-
-// -------------------------------------------------------------
-// BONUS : LocalStorage, Fetch API, tri, comparaison
-// -------------------------------------------------------------
+// Appel initial pour afficher les 6 emplacements vides au chargement
+renderTeam();
