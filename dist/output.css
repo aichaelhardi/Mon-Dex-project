@@ -554,75 +554,6 @@ video {
   display: none;
 }
 
-/* Bouton principal */
-
-.btn-primary {
-  height: 3rem;
-  border-radius: 0.75rem;
-  background-color: #f2a725fb;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-/* Bouton secondaire (contour) */
-
-.btn-outline {
-  height: 2.75rem;
-  border-radius: 0.75rem;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(20 23 29 / var(--tw-border-opacity, 1));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  padding-left: 1rem;
-  padding-right: 1rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(20 23 29 / var(--tw-text-opacity, 1));
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-/* Bouton de filtre par type */
-
-.chip {
-  height: 2.75rem;
-  border-radius: 9999px;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(213 217 225 / var(--tw-border-opacity, 1));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(20 23 29 / var(--tw-text-opacity, 1));
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-/* Champ de formulaire */
-
-.field {
-  height: 3rem;
-  border-radius: 0.75rem;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(213 217 225 / var(--tw-border-opacity, 1));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
 .absolute {
   position: absolute;
 }
@@ -830,42 +761,8 @@ video {
   border-color: rgb(213 217 225 / var(--tw-border-opacity, 1));
 }
 
-.bg-\[\#3B82F6\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#57534E\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(87 83 78 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#8B5CF6\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(139 92 246 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#A855F7\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 85 247 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#EAB308\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#F97316\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
-}
-
 .bg-\[\] {
   background-color: ;
-}
-
-.bg-brand {
-  background-color: #f2a725fb;
 }
 
 .bg-brand-light {
@@ -876,11 +773,6 @@ video {
 .bg-ground {
   --tw-bg-opacity: 1;
   background-color: rgb(237 239 243 / var(--tw-bg-opacity, 1));
-}
-
-.bg-ink {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 23 29 / var(--tw-bg-opacity, 1));
 }
 
 .bg-white {
@@ -1067,6 +959,58 @@ video {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+@layer components 
+  /* Bouton principal */
+ 
+
+  /* Champ de formulaire */
+  
+/* Bordure rouge pour les champs invalides */
+#creature-form .field.is-invalid,
+#creature-form textarea.is-invalid {
+  border: 2px solid #dc2626 !important;
+
+  box-shadow: 0 0 0 1px #dc2626 !important;
+}
+
+/* Bordure verte pour les champs valides */
+
+#creature-form .field.is-valid,
+#creature-form textarea.is-valid {
+  border: 2px solid #16a34a !important;
+  box-shadow: 0 0 0 1px #16a34a !important;
+}
+
+/* Messages sous chaque champ */
+
+#creature-form .error-message {
+  color: #dc2626 !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Message de réussite */
+
+#successMessage.success {
+  display: block;
+  color: #15803d;
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* Message d'échec */
+
+#successMessage.failure {
+  display: block;
+  color: #b91c1c;
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  padding: 12px;
+  border-radius: 10px;
 }
 
 @media (min-width: 640px) {

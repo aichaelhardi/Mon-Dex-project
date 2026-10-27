@@ -14,11 +14,28 @@
 
   /* Bouton de filtre par type */
   .chip {
-    @apply h-11 px-5 rounded-full border-2 border-line bg-white text-ink font-bold outline-none;
+    /* Style pour le bouton actif / sélectionné */
+/* Style de base des boutons de filtres */
+.chip {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); /* Rend le texte bien lisible par-dessus l'image */
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+
+/* Effet au survol */
+.chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Style lorsque le bouton est SÉLECTIONNÉ (avec l'ombre en haut demandée) */
+.chip.active {
+  box-shadow: 0 -8px 20px rgba(255, 255, 255, 0.9), 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-color: #ffffff;
+  transform: scale(1.05);
+}
+}
+@apply h-11 px-5 rounded-full border-2 border-line bg-white text-ink font-bold outline-none;
   }
 
-  /* Champ de formulaire */
-  .field {
-    @apply h-12 rounded-xl border-2 border-line bg-white px-3 text-base outline-none;
-  }
-}

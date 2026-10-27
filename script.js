@@ -12,37 +12,35 @@
 const grid = document.getElementById("grid");
 function afficherCreatures(liste) {
     grid.innerHTML = "";
+
     liste.forEach(function (creature) {
         const carte =
             document.createElement("article");
         carte.className = "flex flex-col gap-3 rounded-[40px] bg-white p-4";
-        carte.innerHTML = `<div class="relative flex h-48 items-center justify-center"> <img src="${creature.image}" alt="${creature.name}"
-        class="h-48 w-full object-contain md:h-56 lg:h-64">
-        <span class="absolute left-3 top-2 font-bold text-black">
-        ${creature.id}
-        </span>
-        </div>
-        <h3 class="text-xl font-bold">${creature.name}</h3>
-        <p>Type :${creature.type}</p>
-        <p>Niveau:${creature.level}</p>
-        <p> Total:${creature.stats.hp +
-            creature.stats.attack +
-            creature.stats.defence
-            }</p>
-        <button
-        type="button"
-        class="btn-outline ajouter à l'equipe-btn"
-        >
-        ajouter à l'equipe
-        </button>
-        `;
-        carte.addEventListener("click", function () {
+        carte.innerHTML = `
+  <img src="${creature.image}" alt="${creature.name}" class="h-40 w-full object-cover rounded-lg">
+  <div class="flex justify-between items-center">
+    <span class="text-xs font-bold text-muted">${creature.id}</span>
+    <span class="px-2 py-1 text-xs font-bold rounded bg-gray-100">${creature.type}</span>
+  </div>
+  <h3 class="font-display text-xl font-bold">${creature.name}</h3>
+  
+  <div class="text-xs text-muted flex gap-2">
+   
+    
+  
+  <!-- LE BOUTON AJOUTER À L'ÉQUIPE -->
+      <button type="button" class="btn-equipe w-full py-2.5 rounded-xl border-2 border-gray-800 font-bold text-gray-800 transition hover:bg-gray-900 hover:text-white">
+        ajouter à l'équipe
+      </button>
+
+    `;
+  carte.addEventListener("click", function () {
             showDetail(creature);
         });
         grid.appendChild(carte);
     });
-}
-afficherCreatures(creatures)
+}afficherCreatures(creatures)
 
 // -------------------------------------------------------------
 // 2. DÉTAIL
@@ -100,9 +98,9 @@ function searchCreatures() {
 
     searchInput.addEventListener("input", function () {
         const searchValue = searchInput.value.toLowerCase().trim();
-        if (searchValue===""){
+        if (searchValue === "") {
 
-         }
+        }
         else {
             const filteredCreatures = []
             creatures.forEach((c) => {
@@ -110,88 +108,202 @@ function searchCreatures() {
                     filteredCreatures.push(c)
             })
             afficherCreatures(filteredCreatures)
-            
+
         }
+        const filterButtons = document.querySelectorAll('#filterButtons button');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Retire la classe 'active' de tous les boutons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Ajoute la classe 'active' uniquement sur le bouton cliqué
+                button.classList.add('active');
+            });
+            afficherCreatures(filteredCreatures)
+        });
 
     });
-};searchCreatures(creatures);
+}; searchCreatures(creatures);
 // -------------------------------------------------------------
 // 5. CRÉER UNE CRÉATURE
 // Validez chaque champ du formulaire avec une expression régulière
 // (voir le tableau du brief). Affichez le message d'erreur sous le
 // champ, et n'ajoutez jamais une créature invalide.
 // -------------------------------------------------------------
-// const form = document.getElementById("creatureForm");
-// const creatures = [];
-// const regex = {
-//     id: /^#\d{3}$/,
-//     name: /^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/,
-//     type: /^[A-Za-zÀ-ÿ -]{3,20}$/,
-//     stats: /^\d{1,3}$/,
-//     image: /^https:\/\/\S+\.(png|jpe?g|webp|gif)$/i,
-//     description: /^[\s\S]{10,200}$/,
+// Sélection du formulaire et des champs
+// Sélection du formulaire et des champs
+const form = document.getElementById('creature-form');
+const inputs = form.querySelectorAll('input, select, textarea');
 
-// };
-// form.addEventListener("submit", function (event) {
-//     event.preventDefault();
-//     const name = document.getElementById("name").value.trim();
-//     const type = document.getElementById("type").value.trim();
-//     const level = document.getElementById("level").value.trim();
-//     const stats = document.getElementById("stats").value.trim();
-//     const image = document.getElementById("image").value.trim();
-//     const description = document.getElementById("description").value.trim();
-//     const values = {
-//         name,
-//         type,
-//         level,
-//         stats,
-//         image,
-//         description,
-//     };
-//     const errors = {
-//         id: "id doit contenir 3 chiffres.",
-//         name: "le nom doit contenir 1 à 29 lettres.",
-//         type: "le type doit contient 3 à 20 lettres",
-//         stats: "les stats doivent etre entre 1 et 3 ",
-//         image: "Entrez un chemin d'image valide(.png,.jpg,.webp).",
-//         description: "La description doit contenir 10 à 200 caractéres."
-//     };
-//     let isValid = true;
-//     for (const field in values) {
-//         const errorElement = document.getElementById(field + "Error");
-//         if (!regex[field].test(values[field])) {
-//             errorElement.testContent = errors[field];
-//             isValid = false;
-//         } else {
-//             errorElement.testContent = "";
-//         }
-//     }
-//     if (!isValid) {
-//         document.getElementById("succesMessage").testContent = "";
-//         return;
-//     }
-//     const creature = {
-//         id: Date.now(),
-//         name,
-//         type,
-//         level: Number(level),
-//         stats: Number(stats),
-//         image,
-//         description
-//     };
-//     creatures.push(creature);
-//     const card = document.createElement("div");
-//     const title = document.createElement("h3");
-//     const details = document.createElement("p");
-//     title.textContent = creature.name;
-//     details.textContent =
-//         `${creature.type}| Level ${creature.level}| Stats ${creature.stats}`;
-//     card.append(title, details);
-//     document.getElementById("creatureList").appendChild(card);
-//     document.getElementById("succesMessage").textContent = "creature créée avec succés!";
+// Tableau principal des créatures
+let creaturesList = [];
 
-//     form.reset();
-// });
+// Définition des règles et des expressions régulières exactes
+const rules = {
+    id: {
+        regex: /^#\d{3}$/,
+        message: "Le numéro doit être au format # suivi de 3 chiffres (ex: #010)."
+    },
+    name: {
+        regex: /^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/,
+        message: "Le nom doit contenir de 2 à 30 caractères, commencer par une lettre ou un chiffre."
+    },
+    type: {
+        isValid: (value) => value !== "",
+        message: "Veuillez choisir un type valide dans la liste."
+    },
+    level: {
+        regex: /.+/,
+        message: "Le niveau ne peut pas être vide."
+    },
+    stat1: {
+        regex: /^\d{1,3}$/,
+        message: "Doit être un nombre entier de 0 à 999."
+    },
+    stat2: {
+        regex: /^\d{1,3}$/,
+        message: "Doit être un nombre entier de 0 a 999."
+    },
+    stat3: {
+        regex: /^\d{1,3}$/,
+        message: "Doit être un nombre entier de 0 à 999."
+    },
+    image: {
+        regex: /^https:\/\/\S+\.(png|jpe?g|webp|gif)$/i,
+        message: "Lien invalide (doit commencer par https:// et finir par .png, .jpg, .jpeg, .webp ou .gif)."
+    },
+    description: {
+        regex: /^[\s\S]{10,200}$/,
+        message: "La description doit contenir entre 10 et 200 caractères."
+    }
+};
+function displayError(inputElement, message) {
+    const errorSpan = inputElement.parentElement.querySelector('.error-message');
+    if (message) {
+        errorSpan.textContent = message;
+    } else {
+        errorSpan.textContent = '';
+    }
+}
+
+// Fonction de validation d'un champ unique
+function validateField(inputElement) {
+    const fieldName = inputElement.name;
+    const fieldValue = inputElement.value.trim();
+    const rule = rules[fieldName];
+
+    if (!rule) return true;
+
+    let isValid = true;
+
+    if (fieldName === 'id') {
+        const isFormatValid = rule.regex.test(fieldValue);
+        const isAlreadyUsed = creaturesList.some(creature => creature.id === fieldValue);
+        if (!isFormatValid || isAlreadyUsed) isValid = false;
+    }
+    else if (fieldName === 'type') {
+        isValid = rule.isValid(fieldValue);
+    }
+    else if (rule.regex) {
+        isValid = rule.regex.test(fieldValue);
+    }
+
+    if (!isValid) {
+        if (fieldName === 'id' && rule.regex.test(fieldValue)) {
+            displayError(inputElement, "Ce numéro est déjà utilisé par une autre créature.");
+        } else {
+            displayError(inputElement, rule.message);
+        }
+        return false;
+    } else {
+        displayError(inputElement, '');
+        return true;
+    }
+}
+
+// Validation en temps réel
+inputs.forEach(input => {
+    input.addEventListener('input', () => validateField(input));
+    input.addEventListener('change', () => validateField(input));
+});
+
+// Soumission du formulaire
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let isFormValid = true;
+    const newCreatureData = {};
+
+    inputs.forEach(input => {
+        const isValid = validateField(input);
+        if (!isValid) {
+            isFormValid = false;
+        } else {
+            newCreatureData[input.name] = input.value.trim();
+        }
+    });
+
+    if (isFormValid) {
+        // 1. Ajout effectif dans le tableau
+        creaturesList.push(newCreatureData);
+
+        // 2. Vérification dans la console pour voir qu'il s'ajoute bien
+        console.log("Créature ajoutée avec succès ! Tableau mis à jour :", creaturesList);
+
+        alert("Créature ajoutée avec succès !");
+
+        // 3. Réinitialisation
+        form.reset();
+        inputs.forEach(input => displayError(input, ''));
+
+        // (Optionnel) Si vous avez une fonction qui affiche les cartes/la liste sur la page, appelez-la ici :
+        // afficherLesCreatures(); 
+    } else {
+        alert("Le formulaire ne peut pas être envoyé tant qu'un champ est invalide.");
+    }
+});
+// 1. Sélectionner l'élément conteneur dans le DOM
+const creaturesContainer = document.getElementById('creatures-container');
+
+
+function renderCreatures() {
+    
+    creaturesContainer.innerHTML = '';
+
+    // Parcourir le tableau des créatures
+    creaturesList.forEach(creature => {
+        // Créer une carte (div) pour chaque créature
+        const card = document.createElement('div');
+        card.className = "flex flex-col gap-3 rounded-card bg-white p-6 shadow-md border border-line";
+        card.innerHTML = `
+        < img src = "${creature.image}" alt = "${creature.name}" class="h-40 w-full object-cover rounded-lg" >
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-bold text-muted">${creature.id}</span>
+        <span class="px-2 py-1 text-xs font-bold rounded bg-gray-100">${creature.type}</span>
+      </div>
+      <h3 class="font-display text-xl font-bold">${creature.name}</h3>
+      <p class="text-sm text-muted">Niveau : ${creature.level}</p>
+      <div class="text-xs text-muted flex gap-2">
+        <span>S1: ${creature.stat1}</span>
+        <span>S2: ${creature.stat2}</span>
+        <span>S3: ${creature.stat3}</span>
+      </div>
+      <p class="text-sm mt-2">${creature.description}</p>
+    `;
+        creaturesContainer.appendChild(card);
+    });
+}
+if (isFormValid) {
+    creaturesList.push(newCreatureData);
+    renderCreatures();
+
+    alert("Créature ajoutée avec succès !");
+
+    form.reset();
+    inputs.forEach(input => displayError(input, ''));
+};
+
 
 
 

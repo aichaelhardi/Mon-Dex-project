@@ -29,26 +29,29 @@
 
   <main class="mx-auto flex max-w-7xl flex-col gap-8 px-8 py-8">
 
-    <!-- ===================== RECHERCHE ET FILTRES ===================== -->
-   <section id="search-section" aria-label="Créatures" class="grid min-w-0 w-full flex-1 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
-      <div class="flex flex-wrap items-end justify-between gap-4">
-        <h1 class="font-display text-4xl font-extrabold">Trouver une créature</h1>
-        <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
-          Rechercher par nom
-          <input id="search" type="search" placeholder="Recherche Par nom" class="field font-normal">
-         </label>
-         </div>
-         <div  id="filterButtons" role="group" aria-label="Filtrer par type" class="flex h-11 flex-nowrap gap-2 overflow-x-auto">
-         <button type="button" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20260428/pngtree-vibrant-digital-wave-with-glowing-blue-and-purple-lines-particles-on-image_21759545.webp')" class="chip shrink-0 bg-cover bg-center text-white">All</button>
-         <button type="button" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_ECPM-l1lkIiqILQYqdw9ioSOw-DY9YhODcnc4vFpg&s=10')" class="chip shrink-0 bg-cover bg-center text-white">Feu</button>
-          <button type="button" style="background-image: url('https://i.pinimg.com/736x/d3/11/60/d31160511be9f63546fc2684a9a60230.jpg')" class="chip shrink-0 bg-cover bg-center text-white">Dragon</button>
-          <button type="button" style="background-image: url('https://img.magnific.com/photos-gratuite/vague-eau-gouttes_1160-169.jpg?semt=ais_hybrid&w=740&q=80')" class="chip shrink-0 bg-cover bg-center text-white">Eau</button>
-          <button type="button" style="background-image: url('https://img.magnific.com/premium-psd/thunderous-sunset-landscape_538547-10581.jpg?semt=ais_hybrid&w=740&q=80')" class="chip shrink-0 bg-cover bg-center text-white">Psy</button>
-          <button type="button" style="background-image: url('https://t4.ftcdn.net/jpg/08/39/34/03/360_F_839340361_BXDv39guFXpjJ6z44HFIHmS4qV9loY3c.jpg')" class="chip shrink-0 bg-cover bg-center text-white">Électrik</button>
-          <button type="button" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/0*0sbQp6wYl00j34O1')" class="chip shrink-0 bg-cover bg-center text-white">Normal</button>
-      </div>
-    </section>
+  
+  <!-- ===================== RECHERCHE ET FILTRES ===================== -->
+<section id="search-section" aria-label="Créatures" class="flex flex-col gap-6 w-full p-6  rounded-card shadow-sm">
+  
+  <!-- Barre de recherche -->
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <h1 class=" text-3xl font-extrabold ">Trouver une créature</h1>
+    <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
+      Rechercher par nom
+      <input id="search" type="search" placeholder="Recherche par nom..." class="field font-normal border rounded-lg p-2">
+    </label>
+  </div>
 
+  <!-- Boutons de filtres (Chips) avec une vraie forme -->
+ <div id="filterButtons" role="group" aria-label="Filtrer par type" class="flex flex-wrap gap-3 p-4">
+  <button type="button" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20260428/pngtree-vibrant-digital-wave-with-glowing-blue-and-purple-lines-particles-on-image_21759545.webp')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">All</button>
+  <button type="button" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_ECPM-l1lkIiqILQYqdw9ioSOw-DY9YhODcnc4vFpg&s=10')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">Feu</button>
+  <button type="button" style="background-image: url('https://i.pinimg.com/736x/d3/11/60/d31160511be9f63546fc2684a9a60230.jpg')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">Dragon</button>
+  <button type="button" style="background-image: url('https://img.magnific.com/photos-gratuite/vague-eau-gouttes_1160-169.jpg?semt=ais_hybrid&w=740&q=80')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">Eau</button>
+  <button type="button" style="background-image: url('https://img.magnific.com/premium-psd/thunderous-sunset-landscape_538547-10581.jpg?semt=ais_hybrid&w=740&q=80')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">Psy</button>
+  <button type="button" style="background-image: url('https://t4.ftcdn.net/jpg/08/39/34/03/360_F_839340361_BXDv39guFXpjJ6z44HFIHmS4qV9loY3c.jpg')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">Électrik</button>
+  <button type="button" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/0*0sbQp6wYl00j34O1')" class="chip px-6 py-3 rounded-xl bg-cover bg-center text-white font-bold text-sm shadow-md">Normal</button>
+</div>
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-8 lg:items-start">
 
       <!-- ===================== GRILLE DES CRÉATURES ===================== -->
@@ -72,10 +75,11 @@
           </div>
           <p id="detail-description"  class="text-gray-700">Un pokémon célèbre qui stocke l'électricité dans ces joues.</p>
           <div class="flex flex-col gap-2 text-sm">
-            <div  class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span id="detail-hp" class="font-bold">PV</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[30%] rounded-full bg-brand"></span></span><span class="text-right font-mono">35</span></div>
+             <p id="detail-level">Niveau: 5</p>
+            <div  class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span id="detail-hp" class="font-bold">PV</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[30%] rounded-full bg-brand"></span></span><span class="text-right font-mono ">35</span></div>
             <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span id="detail-attack" class="font-bold">Attaque</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[33%] rounded-full bg-brand"></span></span><span class="text-right font-mono">55</span></div>
             <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2"><span id="detail-defence" class="font-bold">Défense</span><span class="h-3 rounded-full bg-ground"><span class="block h-3 w-[43%] rounded-full bg-brand"></span></span><span class="text-right font-mono">40</span></div>
-            <p id="detail-level">Niveau: 5</p>
+           
           </div>
           <button type="button" class="hidden">Ajouter à l'équipe</button>
         </section>
@@ -138,9 +142,13 @@
         <div class="flex flex-wrap justify-end gap-3 md:col-span-2 lg:col-span-4">
           <button type="reset" class="btn-outline px-6">Effacer</button>
           <button type="submit" class="btn-primary">Ajouter la créature</button>
+          <!-- Section où s'afficheront les créatures -->
+     <div id="creatures-container" class="grid grid-cols-1 gap-4 md:grid-cols-3 mt-8">
+     <!-- Les cartes des créatures s'ajouteront ici dynamiquement -->
+     </div>
         </div>
       </form>
-    </section>
+    </section> 
 
   </main>
 
